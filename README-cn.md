@@ -6,12 +6,16 @@
 ## 翻译:
 
 * [English](README.md)
-* [Spanish](README-es.md) 
+* [Español](README-es.md)
+* [Français](README-fr.md)
 * [中文版](README-cn.md)
 * [日本語](README-ja.md)
+* [한국어](README-ko.md)
+* [Turkish](README-tr.md)
+* [Greek](README-gr.md)
 
 ## 什么是正则表达式?
- 
+
 > 正则表达式是一组由字母和符号组成的特殊文本, 它可以用来从文本中找出满足你想要的格式的句子.
 
 
@@ -24,7 +28,7 @@
 
 <br/><br/>
 <p align="center">
-<img src="https://i.imgur.com/Pq5Llat.png" alt="Regular expression">
+  <img src="./img/regexp-en.png" alt="Regular expression">
 </p>
 
 以上的正则表达式可以接受 `john_doe`, `jo-hn_doe`, `john12_as`.
@@ -69,7 +73,7 @@
 例如: 一个正则表达式 `the`, 它表示一个规则: 由字母`t`开始,接着是`h`,再接着是`e`.
 
 <pre>
-"the" => The fat cat sat on <a href="#learn-regex"><strong>the</strong></a> mat. 
+"the" => The fat cat sat on <a href="#learn-regex"><strong>the</strong></a> mat.
 </pre>
 
 [在线练习](https://regex101.com/r/dmRygT/1)
@@ -86,7 +90,7 @@
 
 ## 2. 元字符
 
-正则表达式主要依赖于元字符.  
+正则表达式主要依赖于元字符.
 元字符不代表他们本身的字面意思, 他们都有特殊的含义. 一些元字符写在方括号中的时候有一些特殊的意思. 以下是一些元字符的介绍:
 
 |元字符|描述|
@@ -97,7 +101,7 @@
 |*|匹配>=0个重复的在*号之前的字符.|
 |+|匹配>=1个重复的+号前的字符.
 |?|标记?之前的字符为可选.|
-|{n,m}|匹配num个中括号之前的字符 (n <= num <= m).|
+|{n,m}|匹配num个大括号之前的字符 (n <= num <= m).|
 |(xyz)|字符集, 匹配与 xyz 完全相等的字符串.|
 |&#124;|或运算符,匹配符号前或后的字符.|
 |&#92;|转义字符,用于匹配一些保留的字符 <code>[ ] ( ) { } . * + ? ^ $ \ &#124;</code>|
@@ -106,7 +110,7 @@
 
 ## 2.1 点运算符 `.`
 
-`.`是元字符中最简单的例子. 
+`.`是元字符中最简单的例子.
 `.`匹配任意单个字符, 但不匹配换行符.
 例如, 表达式`.ar`匹配一个任意字符后面跟着是`a`和`r`的字符串.
 
@@ -152,7 +156,7 @@
 
 ## 2.3 重复次数
 
-后面跟着元字符 `+`, `*` or `?` 的, 用来指定匹配子模式的次数. 
+后面跟着元字符 `+`, `*` or `?` 的, 用来指定匹配子模式的次数.
 这些元字符在不同的情况下有着不同的意思.
 
 ### 2.3.1 `*` 号
@@ -177,7 +181,7 @@
 
 ### 2.3.2 `+` 号
 
-`+`号匹配`+`号之前的字符出现 >=1 次个字符.
+`+`号匹配`+`号之前的字符出现 >=1 次.
 例如表达式`c.+t` 匹配以首字母`c`开头以`t`结尾,中间跟着任意个字符的字符串.
 
 <pre>
@@ -206,8 +210,7 @@
 ## 2.4 `{}` 号
 
 在正则表达式中 `{}` 是一个量词, 常用来一个或一组字符可以重复出现的次数.
-例如,  表达式 `[0-9]{2,3}` 匹配 2～3 位 0～9 的数字.
-
+例如,  表达式 `[0-9]{2,3}` 匹配最少 2 位最多 3 位 0~9 的数字.
 
 <pre>
 "[0-9]{2,3}" => The number was 9.<a href="#learn-regex"><strong>999</strong></a>7 but we rounded it off to <a href="#learn-regex"><strong>10</strong></a>.0.
@@ -218,7 +221,7 @@
 我们可以省略第二个参数.
 例如, `[0-9]{2,}` 匹配至少两位 0~9 的数字.
 
-如果逗号也省略掉则表示重复固定的次数. 
+如果逗号也省略掉则表示重复固定的次数.
 例如, `[0-9]{3}` 匹配3位数字
 
 <pre>
@@ -352,14 +355,14 @@
 
 `?=...` 前置约束(存在), 表示第一部分表达式必须跟在 `?=...`定义的表达式之后.
 
-返回结果只瞒住第一部分表达式.
+返回结果只满足第一部分表达式.
 定义一个前置约束(存在)要使用 `()`. 在括号内部使用一个问号和等号: `(?=...)`. 
 
 前置约束的内容写在括号中的等号后面.
-例如, 表达式 `[T|t]he(?=\sfat)` 匹配 `The` 和 `the`, 在括号中我们又定义了前置约束(存在) `(?=\sfat)` ,即 `The` 和 `the` 后面紧跟着 `(空格)fat`.
+例如, 表达式 `(T|t)he(?=\sfat)` 匹配 `The` 和 `the`, 在括号中我们又定义了前置约束(存在) `(?=\sfat)` ,即 `The` 和 `the` 后面紧跟着 `(空格)fat`.
 
 <pre>
-"[T|t]he(?=\sfat)" => <a href="#learn-regex"><strong>The</strong></a> fat cat sat on the mat.
+"(T|t)he(?=\sfat)" => <a href="#learn-regex"><strong>The</strong></a> fat cat sat on the mat.
 </pre>
 
 [在线练习](https://regex101.com/r/IDDARt/1)
@@ -367,12 +370,12 @@
 ### 4.2 `?!...` 前置约束-排除
 
 前置约束-排除 `?!` 用于筛选所有匹配结果, 筛选条件为 其后不跟随着定义的格式
-`前置约束-排除`  定义和 `前置约束(存在)` 一样, 区别就是 `=` 替换成 `!` 也就是 `(?!...)`. 
+`前置约束-排除`  定义和 `前置约束(存在)` 一样, 区别就是 `=` 替换成 `!` 也就是 `(?!...)`.
 
-表达式 `[T|t]he(?!\sfat)` 匹配 `The` 和 `the`, 且其后不跟着 `(空格)fat`.
+表达式 `(T|t)he(?!\sfat)` 匹配 `The` 和 `the`, 且其后不跟着 `(空格)fat`.
 
 <pre>
-"[T|t]he(?!\sfat)" => The fat cat sat on <a href="#learn-regex"><strong>the</strong></a> mat.
+"(T|t)he(?!\sfat)" => The fat cat sat on <a href="#learn-regex"><strong>the</strong></a> mat.
 </pre>
 
 [在线练习](https://regex101.com/r/V32Npg/1)
@@ -380,10 +383,10 @@
 ### 4.3 `?<= ...` 后置约束-存在
 
 后置约束-存在 记作`(?<=...)` 用于筛选所有匹配结果, 筛选条件为 其前跟随着定义的格式.
-例如, 表达式 `(?<=[T|t]he\s)(fat|mat)` 匹配 `fat` 和 `mat`, 且其前跟着 `The` 或 `the`.
+例如, 表达式 `(?<=(T|t)he\s)(fat|mat)` 匹配 `fat` 和 `mat`, 且其前跟着 `The` 或 `the`.
 
 <pre>
-"(?<=[T|t]he\s)(fat|mat)" => The <a href="#learn-regex"><strong>fat</strong></a> cat sat on the <a href="#learn-regex"><strong>mat</strong></a>.
+"(?<=(T|t)he\s)(fat|mat)" => The <a href="#learn-regex"><strong>fat</strong></a> cat sat on the <a href="#learn-regex"><strong>mat</strong></a>.
 </pre>
 
 [在线练习](https://regex101.com/r/avH165/1)
@@ -394,7 +397,7 @@
 例如, 表达式 `(?<!(T|t)he\s)(cat)` 匹配 `cat`, 且其前不跟着 `The` 或 `the`.
 
 <pre>
-"(?&lt;![T|t]he\s)(cat)" => The cat sat on <a href="#learn-regex"><strong>cat</strong></a>.
+"(?&lt;!(T|t)he\s)(cat)" => The cat sat on <a href="#learn-regex"><strong>cat</strong></a>.
 </pre>
 
 [在线练习](https://regex101.com/r/8Efx5G/1)
@@ -429,7 +432,7 @@
 
 ### 5.2 全局搜索 (Global search)
 
-修饰符 `g` 常用语执行一个全局搜索匹配, 即(不仅仅返回第一个匹配的, 而是返回全部). 
+修饰符 `g` 常用语执行一个全局搜索匹配, 即(不仅仅返回第一个匹配的, 而是返回全部).
 例如, 表达式 `/.(at)/g` 表示搜索 任意字符(除了换行) + `at`, 并返回全部结果.
 
 <pre>
@@ -446,7 +449,7 @@
 
 ### 5.3 多行修饰符 (Multiline)
 
-多行修饰符 `m` 常用语执行一个多行匹配. 
+多行修饰符 `m` 常用语执行一个多行匹配.
 
 像之前介绍的 `(^,$)` 用于检查格式是否是在待检测字符串的开头或结尾. 但我们如果想要它在每行的开头和结尾生效, 我们需要用到多行修饰符 `m`.
 
